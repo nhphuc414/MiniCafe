@@ -7,32 +7,61 @@ using System.Threading.Tasks;
 
 namespace MiniCafeDAL.IDAL.DAL
 {
-    internal class OrderDetailDAL : IOrderDetailDAL
+    public class OrderDetailDAL : IOrderDetailDAL
     {
-        private readonly MiniCafeEntities _context;
+        private static IOrderDetailDAL instance = null;
+        private static readonly object padlock = new object();
 
-        public OrderDetailDAL(MiniCafeEntities context)
+        private OrderDetailDAL()
         {
-            _context = context;
+            
+        }
+
+        public static IOrderDetailDAL Instance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new OrderDetailDAL();
+                    }
+                    return instance;
+                }
+            }
         }
         public void AddOrderDetail(OrderDetail orderDetail)
         {
-            _context.OrderDetails.Add(orderDetail);
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                entities.OrderDetails.Add(orderDetail);
+                entities.SaveChanges();
+            }
+           
         }
         public void DeleteOrderDetail(OrderDetail orderDetail)
         {
-            _context.OrderDetails.Remove(orderDetail);
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities()) {
+                entities.OrderDetails.Remove(orderDetail);
+                entities.SaveChanges();
+            }
+            
         }
         public List<OrderDetail> GetOrderDetailsByOrderId(int orderId)
         {
-            return _context.OrderDetails.Where(od => od.orderId == orderId).ToList();
+            using (MiniCafeEntities entities = new MiniCafeEntities()) { 
+                return entities.OrderDetails.Where(od => od.orderId == orderId).ToList(); 
+            }
+            
         }
         public void UpdateOrderDetail(OrderDetail orderDetail)
         {
-            _context.Entry(orderDetail).State = System.Data.Entity.EntityState.Modified;
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities()) {
+                entities.Entry(orderDetail).State = System.Data.Entity.EntityState.Modified;
+                entities.SaveChanges();
+            }
+            
         }
 
     }

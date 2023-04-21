@@ -11,12 +11,28 @@ namespace MiniCafeBUS.IBUS.BUS
     public class TableBUS : ITableBUS
     {
         private readonly ITableDAL _tableDAL;
+        private static ITableBUS instance = null;
+        private static readonly object padlock = new object();
 
-        public TableBUS(ITableDAL tableDAL)
+        private TableBUS()
         {
-            _tableDAL = tableDAL;
+            _tableDAL = TableDAL.Instance;
         }
 
+        public static ITableBUS Instance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new TableBUS();
+                    }
+                    return instance;
+                }
+            }
+        }
         public void AddTable(Table table)
         {
             _tableDAL.AddTable(table);

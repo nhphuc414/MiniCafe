@@ -13,6 +13,7 @@ namespace MiniCafeDAL.IDAL
         void UpdateEmployee(Employee employee);
         void DeleteEmployee(int id);
         Employee GetEmployeeById(int id);
+        Employee GetEmployeeByUsernameAndPassword(string username, string password);
         List<Employee> GetAllEmployees();
         List<Employee> GetEmployeesByShiftId(int shiftId);
         List<Employee> GetEmployeesOnActive();

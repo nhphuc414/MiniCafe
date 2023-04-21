@@ -7,47 +7,91 @@ using System.Threading.Tasks;
 
 namespace MiniCafeDAL.IDAL.DAL
 {
-    internal class EmployeeDAL : IEmployeeDAL
+    public class EmployeeDAL : IEmployeeDAL
     {
-        private readonly MiniCafeEntities _context;
+        private static IEmployeeDAL instance = null;
+        private static readonly object padlock = new object();
+        
 
-        public EmployeeDAL(MiniCafeEntities context)
+        private EmployeeDAL()
         {
-            _context = context;
+        }
+
+        public static IEmployeeDAL Instance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new EmployeeDAL();
+                    }
+                    return instance;
+                }
+            }
         }
         public void AddEmployee(Employee employee)
         {
-            _context.Employees.Add(employee);
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                entities.Employees.Add(employee);
+                entities.SaveChanges();
+            }
         }
         public void UpdateEmployee(Employee employee)
         {
-            _context.Entry(employee).State = System.Data.Entity.EntityState.Modified;
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                entities.Entry(employee).State = System.Data.Entity.EntityState.Modified;
+                entities.SaveChanges();
+            }
         }
         public void DeleteEmployee(int id)
         {
-            Employee employeeToDelete = _context.Employees.Find(id);
-            _context.Employees.Remove(employeeToDelete);
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                Employee employeeToDelete = entities.Employees.Find(id);
+                entities.Employees.Remove(employeeToDelete);
+                entities.SaveChanges();
+            }
+               
         }
         public Employee GetEmployeeById(int id)
         {
-            return _context.Employees.Find(id);
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.Employees.Find(id);
+            }
         }
         public List<Employee> GetAllEmployees()
         {
-            return _context.Employees.ToList();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.Employees.ToList();
+            }
         }
         public List<Employee> GetEmployeesByShiftId(int shiftId)
         {
-            return _context.Employees.Where(e => e.shiftId == shiftId).ToList();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.Employees.Where(e => e.shiftId == shiftId).ToList();
+            }
         }
         public List<Employee> GetEmployeesOnActive()
         {
-            return _context.Employees.Where(e => !e.isFired).ToList();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.Employees.Where(e => !e.isFired).ToList();
+            }
         }
+        public Employee GetEmployeeByUsernameAndPassword(string username, string password)
+        {
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.Employees.FirstOrDefault(e => e.username.Equals(username) && e.password.Equals(password));
 
-
+            }
+        }
     }
 }

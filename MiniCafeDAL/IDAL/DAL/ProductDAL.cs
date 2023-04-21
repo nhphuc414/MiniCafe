@@ -7,45 +7,81 @@ using System.Threading.Tasks;
 
 namespace MiniCafeDAL.IDAL.DAL
 {
-    internal class ProductDAL : IProductDAL
+    public class ProductDAL : IProductDAL
     {
-        private readonly MiniCafeEntities _context;
-
-        public ProductDAL(MiniCafeEntities context)
+        private static IProductDAL instance = null;
+        private static readonly object padlock = new object();
+        private ProductDAL()
         {
-            _context = context;
+            
+        }
+
+        public static IProductDAL Instance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new ProductDAL();
+                    }
+                    return instance;
+                }
+            }
         }
         public void AddProduct(Product product)
         {
-            _context.Products.Add(product);
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities()) {
+                entities.Products.Add(product);
+                entities.SaveChanges();
+            }
+           
         }
         public void UpdateProduct(Product product)
         {
-            _context.Entry(product).State = System.Data.Entity.EntityState.Modified;
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities()) {
+                entities.Entry(product).State = System.Data.Entity.EntityState.Modified;
+                entities.SaveChanges();
+            }
+            
         }
         public void DeleteProduct(int id)
         {
-            Product productToDelete = _context.Products.Find(id);
-            _context.Products.Remove(productToDelete);
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities()) {
+                Product productToDelete = entities.Products.Find(id);
+                entities.Products.Remove(productToDelete);
+                entities.SaveChanges();
+            }
+           
         }
         public List<Product> GetAllProducts()
         {
-            return _context.Products.ToList();
+            using (MiniCafeEntities entities = new MiniCafeEntities()) {
+                return entities.Products.ToList();
+            }
+            
         }
         public Product GetProductById(int id)
         {
-            return _context.Products.Find(id);
+            using (MiniCafeEntities entities = new MiniCafeEntities()) {
+                return entities.Products.Find(id);
+            }
+            
         }
         public List<Product> GetProductsByCategoryId(int categoryId)
         {
-            return _context.Products.Where(p => p.categoryId == categoryId).ToList();
+            using (MiniCafeEntities entities = new MiniCafeEntities()) {
+                return entities.Products.Where(p => p.categoryId == categoryId).ToList();
+            }
+           
         }
         public List<Product> GetProductsIsActive()
         {
-            return _context.Products.Where(p => !p.discontinued || p.quantity != 0).ToList();
+            using (MiniCafeEntities entities = new MiniCafeEntities()) {
+                return entities.Products.Where(p => !p.discontinued || p.quantity != 0).ToList();
+            }
+            
         }
     }
 }

@@ -6,35 +6,71 @@ namespace MiniCafeDAL.IDAL.DAL
 {
     public class TableDAL : ITableDAL
     {
-        private readonly MiniCafeEntities _context;
+        private static ITableDAL instance = null;
+        private static readonly object padlock = new object();
 
-        public TableDAL(MiniCafeEntities context)
+        private TableDAL()
         {
-            _context = context;
+
+        }
+
+        public static ITableDAL Instance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new TableDAL();
+                    }
+                    return instance;
+                }
+            }
         }
         public void AddTable(Table table)
         {
-            _context.Tables.Add(table);
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                entities.Tables.Add(table);
+                entities.SaveChanges();
+            }
+
         }
         public void UpdateTable(Table table)
         {
-            _context.Entry(table).State = System.Data.Entity.EntityState.Modified;
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                entities.Entry(table).State = System.Data.Entity.EntityState.Modified;
+                entities.SaveChanges();
+            }
+
         }
         public void DeleteTable(int id)
         {
-            Table tableToDelete = _context.Tables.Find(id);
-            _context.Tables.Remove(tableToDelete);
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                Table tableToDelete = entities.Tables.Find(id);
+                entities.Tables.Remove(tableToDelete);
+                entities.SaveChanges();
+            }
+
         }
         public Table GetTableById(int id)
         {
-            return _context.Tables.Find(id);
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.Tables.Find(id);
+            }
+
         }
         public List<Table> GetAllTables()
         {
-            return _context.Tables.ToList();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.Tables.ToList();
+            }
+
         }
     }
 }

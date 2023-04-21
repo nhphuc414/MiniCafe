@@ -9,35 +9,71 @@ namespace MiniCafeDAL.IDAL.DAL
 {
     public class ShiftDAL : IShiftDAL
     {
-        private readonly MiniCafeEntities _context;
+        private static IShiftDAL instance = null;
+        private static readonly object padlock = new object();
 
-        public ShiftDAL(MiniCafeEntities context)
+        private ShiftDAL()
         {
-            _context = context;
+
+        }
+
+        public static IShiftDAL Instance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new ShiftDAL();
+                    }
+                    return instance;
+                }
+            }
         }
         public void AddShift(Shift shift)
         {
-            _context.Shifts.Add(shift);
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                entities.Shifts.Add(shift);
+                entities.SaveChanges();
+            }
         }
+
         public void UpdateShift(Shift shift)
         {
-            _context.Entry(shift).State = System.Data.Entity.EntityState.Modified;
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                entities.Entry(shift).State = System.Data.Entity.EntityState.Modified;
+                entities.SaveChanges();
+            }
+
         }
         public void DeleteShift(int id)
         {
-            Shift shiftToDelete = _context.Shifts.Find(id);
-            _context.Shifts.Remove(shiftToDelete);
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                Shift shiftToDelete = entities.Shifts.Find(id);
+                entities.Shifts.Remove(shiftToDelete);
+                entities.SaveChanges();
+            }
+
         }
         public Shift GetShiftById(int id)
         {
-            return _context.Shifts.Find(id);
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.Shifts.Find(id);
+            }
+
         }
         public List<Shift> GetAllShifts()
         {
-            return _context.Shifts.ToList();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.Shifts.ToList();
+            }
+
         }
     }
 }

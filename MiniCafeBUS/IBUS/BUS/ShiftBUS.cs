@@ -12,10 +12,27 @@ namespace MiniCafeBUS.IBUS.BUS
     public class ShiftBUS : IShiftBUS
     {
         private readonly IShiftDAL _shiftDAL;
+        private static IShiftBUS instance = null;
+        private static readonly object padlock = new object();
 
-        public ShiftBUS(IShiftDAL shiftDAL)
+        private ShiftBUS()
         {
-            _shiftDAL = shiftDAL;
+            _shiftDAL = ShiftDAL.Instance;
+        }
+
+        public static IShiftBUS Instance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new ShiftBUS();
+                    }
+                    return instance;
+                }
+            }
         }
 
         public void AddShift(Shift shift)

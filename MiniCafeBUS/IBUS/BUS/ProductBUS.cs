@@ -11,11 +11,29 @@ namespace MiniCafeBUS.IBUS.BUS
 {
     public class ProductBUS : IProductBUS
     {
+        
+        private static IProductBUS instance = null;
+        private static readonly object padlock = new object();
         private readonly IProductDAL _producDAL;
 
-        public ProductBUS(IProductDAL producDAL)
+        private ProductBUS()
         {
-            _producDAL = producDAL;
+            _producDAL = ProductDAL.Instance;
+        }
+
+        public static IProductBUS Instance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new ProductBUS();
+                    }
+                    return instance;
+                }
+            }
         }
 
         public void AddProduct(Product product)

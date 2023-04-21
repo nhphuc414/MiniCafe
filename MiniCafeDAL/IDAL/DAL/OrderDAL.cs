@@ -7,48 +7,91 @@ using System.Threading.Tasks;
 
 namespace MiniCafeDAL.IDAL.DAL
 {
-    internal class OrderDAL : IOrderDAL
+    public class OrderDAL : IOrderDAL
     {
-        private readonly MiniCafeEntities _context;
+        private static IOrderDAL instance = null;
+        private static readonly object padlock = new object();
 
-        public OrderDAL(MiniCafeEntities context)
+        private OrderDAL()
         {
-            _context = context;
+        }
+
+        public static IOrderDAL Instance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new OrderDAL();
+                    }
+                    return instance;
+                }
+            }
         }
         public void AddOrder(Order order)
         {
-            _context.Orders.Add(order);
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                entities.Orders.Add(order);
+                entities.SaveChanges();
+            }
+
         }
         public void UpdateOrder(Order order)
         {
-            _context.Entry(order).State = System.Data.Entity.EntityState.Modified;
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                entities.Entry(order).State = System.Data.Entity.EntityState.Modified;
+                entities.SaveChanges();
+            }
+
         }
         public void DeleteOrder(int id)
         {
-            Order orderToDelete = _context.Orders.Find(id);
-            _context.Orders.Remove(orderToDelete);
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                Order orderToDelete = entities.Orders.Find(id);
+                entities.Orders.Remove(orderToDelete);
+                entities.SaveChanges();
+            }
+
         }
 
         public List<Order> GetAllOrders()
         {
-            return _context.Orders.ToList();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.Orders.ToList();
+            }
+
         }
 
         public List<Order> GetOrderByEmployeeId(int employeeId)
         {
-            return _context.Orders.Where(o => o.employeeId == employeeId).ToList();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.Orders.Where(o => o.employeeId == employeeId).ToList();
+            }
+
         }
 
         public List<Order> GetOrderFromDayToDay(DateTime fromDate, DateTime toDate)
         {
-            return _context.Orders.Where(o => o.createDate >= fromDate && o.createDate <= toDate).ToList();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.Orders.Where(o => o.createDate >= fromDate && o.createDate <= toDate).ToList();
+            }
+
         }
         public Order GetOrderById(int id)
         {
-            return _context.Orders.Find(id);
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.Orders.Find(id);
+            }
+
         }
 
     }

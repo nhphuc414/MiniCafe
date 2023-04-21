@@ -65,7 +65,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Utils.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MiniCafeDAL\MiniCafeDAL.csproj">
       <Project>{eb8cb113-0a74-42a0-84ee-5e4552773aaf}</Project>

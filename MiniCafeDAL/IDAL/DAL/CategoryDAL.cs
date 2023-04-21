@@ -9,36 +9,62 @@ namespace MiniCafeDAL.IDAL.DAL
 {
     public class CategoryDAL : ICategoryDAL
     {
-        private readonly MiniCafeEntities _context;
-
-        public CategoryDAL(MiniCafeEntities context)
+        private static ICategoryDAL instance = null;
+        private static readonly object padlock = new object();
+        private CategoryDAL()
         {
-            _context = context;
+        }
+
+        public static ICategoryDAL Instance
+        {
+            get
+            {
+                    if (instance == null)
+                    {
+                        instance = new CategoryDAL();
+                    }
+                    return instance;
+            }
         }
 
         public void AddCategory(Category category)
         {
-            _context.Categories.Add(category);
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                entities.Categories.Add(category);
+                entities.SaveChanges();
+            }
         }
         public void UpdateCategory(Category category)
         {
-            _context.Entry(category).State = System.Data.Entity.EntityState.Modified;
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                entities.Entry(category).State = System.Data.Entity.EntityState.Modified;
+                entities.SaveChanges();
+            }
         }
         public void DeleteCategory(int id)
         {
-            Category categoryToDelete = _context.Categories.Find(id);
-            _context.Categories.Remove(categoryToDelete);
-            _context.SaveChanges();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                Category categoryToDelete = entities.Categories.Find(id);
+                entities.Categories.Remove(categoryToDelete);
+                entities.SaveChanges();
+            }
         }
         public Category GetCategoryById(int id)
         {
-            return _context.Categories.Find(id);
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.Categories.Find(id);
+            }
         }
         public List<Category> GetAllCategories()
         {
-            return _context.Categories.ToList();
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.Categories.ToList();
+            }
         }
 
     }

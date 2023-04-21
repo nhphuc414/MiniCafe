@@ -11,11 +11,28 @@ namespace MiniCafeBUS.IBUS.BUS
 {
     public class OrderDetailBUS : IOrderDetailBUS
     {
+        private static IOrderDetailBUS instance = null;
+        private static readonly object padlock = new object();
         private readonly IOrderDetailDAL _orderDetailDAL;
 
-        public OrderDetailBUS(IOrderDetailDAL orderDetailDAL)
+        private OrderDetailBUS()
         {
-            _orderDetailDAL = orderDetailDAL;
+            _orderDetailDAL = OrderDetailDAL.Instance;
+        }
+
+        public static IOrderDetailBUS Instance
+        {
+            get
+            {
+                lock (padlock)
+                {
+                    if (instance == null)
+                    {
+                        instance = new OrderDetailBUS();
+                    }
+                    return instance;
+                }
+            }
         }
 
         public void AddOrderDetail(OrderDetail orderDetail)
