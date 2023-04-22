@@ -14,11 +14,10 @@ namespace MiniCafeBUS.IBUS.BUS
     {
         private static IEmployeeBUS instance = null;
         private static readonly object padlock = new object();
-        private readonly IEmployeeDAL _employeeDAL;
 
         private EmployeeBUS()
         {
-            _employeeDAL = EmployeeDAL.Instance;
+            
         }
 
         public static IEmployeeBUS Instance
@@ -43,45 +42,51 @@ namespace MiniCafeBUS.IBUS.BUS
                 throw new ArgumentNullException(nameof(employee), "Thông tin nhân viên không được để trống.");
             }
             if (Utils.Utils.checkName(employee.employeeName)
-                && Utils.Utils.checkUsername(employee.username)
+                && Utils.Utils.checkNumber(employee.number)
                 && Utils.Utils.checkBirthday(employee.birthday)
-                && Utils.Utils.checkNumber(employee.number)){
+                && Utils.Utils.checkUsername(employee.username)
+               )
+            {
                 if (string.IsNullOrEmpty(employee.password))
                 {
                     throw new ArgumentException("Mật khẩu không được để trống.");
                 }
 
-                if (_employeeDAL.GetAllEmployees().Any(e => e.username.Equals(employee.username)))
+                if (EmployeeDAL.Instance.GetAllEmployees().Any(e => e.username.Equals(employee.username)))
                 {
                     throw new ArgumentException("Tên đăng nhập đã tồn tại trong hệ thống.");
                 }
-                _employeeDAL.AddEmployee(employee);
+                EmployeeDAL.Instance.AddEmployee(employee);
             }
         }
 
         public void DeleteEmployee(int id)
         {
-            var employee = _employeeDAL.GetEmployeeById(id);
+            var employee = EmployeeDAL.Instance.GetEmployeeById(id);
             if (employee == null)
             {
                 throw new ArgumentException("Nhân viên không tồn tại.");
             }
-            _employeeDAL.DeleteEmployee(id);
+            if (OrderDAL.Instance.GetOrderByEmployeeId(id).Any())
+            {
+                throw new ArgumentException("Nhân viên đã từng lập hóa đơn không thể xóa");
+            }
+            EmployeeDAL.Instance.DeleteEmployee(id);
         }
 
         public List<Employee> GetAllEmployees()
         {
-            return _employeeDAL.GetAllEmployees();
+            return EmployeeDAL.Instance.GetAllEmployees();
         }
 
         public Employee GetEmployeeById(int id)
         {
-            var employee = _employeeDAL.GetEmployeeById(id);
+            var employee = EmployeeDAL.Instance.GetEmployeeById(id);
             if (employee == null)
             {
                 throw new ArgumentException("Nhân viên không tồn tại.");
             }
-            return _employeeDAL.GetEmployeeById(id);
+            return EmployeeDAL.Instance.GetEmployeeById(id);
         }
 
         public Employee GetEmployeeByUsernameAndPassword(string username, string password)
@@ -90,7 +95,7 @@ namespace MiniCafeBUS.IBUS.BUS
             {
                 throw new ArgumentException("Vui lòng điền hết thông tin");
             }
-            Employee employee = _employeeDAL.GetEmployeeByUsernameAndPassword(username, password);
+            Employee employee = EmployeeDAL.Instance.GetEmployeeByUsernameAndPassword(username, password);
             if (employee == null)
             {
                 throw new ArgumentException("Sai tài khoản hoặc mật khẩu.");
@@ -101,12 +106,12 @@ namespace MiniCafeBUS.IBUS.BUS
         public List<Employee> GetEmployeesByShiftId(int shiftId)
         {
 
-            return _employeeDAL.GetEmployeesByShiftId(shiftId);
+            return EmployeeDAL.Instance.GetEmployeesByShiftId(shiftId);
         }
 
         public List<Employee> GetEmployeesOnActive()
         {
-            return _employeeDAL.GetEmployeesOnActive();
+            return EmployeeDAL.Instance.GetEmployeesOnActive();
         }
 
         public void UpdateEmployee(Employee employee)
@@ -116,11 +121,14 @@ namespace MiniCafeBUS.IBUS.BUS
                 throw new ArgumentNullException(nameof(employee), "Thông tin nhân viên không được để trống.");
             }
             if (Utils.Utils.checkName(employee.employeeName)
-                && Utils.Utils.checkUsername(employee.username)
                 && Utils.Utils.checkBirthday(employee.birthday)
                 && Utils.Utils.checkNumber(employee.number))
             {
-                _employeeDAL.UpdateEmployee(employee);
+                if(EmployeeDAL.Instance.GetAllEmployees().Any(e =>e.id != employee.id && e.number == employee.number))
+                {
+                    throw new ArgumentNullException(nameof(employee), "Trùng số điện thoại.");
+                } 
+                EmployeeDAL.Instance.UpdateEmployee(employee);
             }
         }
     }

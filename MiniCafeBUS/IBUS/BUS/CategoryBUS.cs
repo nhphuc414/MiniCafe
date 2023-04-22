@@ -92,7 +92,6 @@ namespace MiniCafeBUS.IBUS.BUS
             {
                 throw new ArgumentException("Tên Category đã tồn tại.");
             }
-
             CategoryDAL.Instance.UpdateCategory(category);
         }
     }

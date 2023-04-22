@@ -228,6 +228,7 @@
             // 
             this.btnLogout.Animated = true;
             this.btnLogout.BorderRadius = 5;
+            this.btnLogout.BorderThickness = 1;
             this.btnLogout.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnLogout.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnLogout.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;

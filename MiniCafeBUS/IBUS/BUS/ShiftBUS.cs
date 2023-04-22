@@ -11,13 +11,12 @@ namespace MiniCafeBUS.IBUS.BUS
 {
     public class ShiftBUS : IShiftBUS
     {
-        private readonly IShiftDAL _shiftDAL;
         private static IShiftBUS instance = null;
         private static readonly object padlock = new object();
 
         private ShiftBUS()
         {
-            _shiftDAL = ShiftDAL.Instance;
+            
         }
 
         public static IShiftBUS Instance
@@ -37,27 +36,61 @@ namespace MiniCafeBUS.IBUS.BUS
 
         public void AddShift(Shift shift)
         {
-            _shiftDAL.AddShift(shift);
+            if (shift == null)
+            {
+                throw new ArgumentNullException("Không được để trống");
+            }
+            if (shift.endTime <= shift.startTime)
+            {
+                throw new InvalidOperationException("Vui lòng chọn thời gian chính xác");
+            }
+            if (ShiftDAL.Instance.GetAllShifts().Any(
+                s => (shift.startTime >= s.startTime && shift.startTime < s.endTime) ||
+            (shift.endTime > s.startTime && shift.endTime <= s.endTime) ||
+            (shift.startTime < s.startTime && shift.endTime > s.endTime)))
+            {
+                throw new ArgumentException("Trùng giờ với ca làm khác");
+            }
+            ShiftDAL.Instance.AddShift(shift);
         }
 
         public void DeleteShift(int id)
         {
-            _shiftDAL.DeleteShift(id);
+            if (EmployeeDAL.Instance.GetEmployeesByShiftId(id).Any(e =>e.shiftId==id))
+            {
+                throw new ArgumentException("Vẫn còn nhân viên trong ca");
+            }
+            ShiftDAL.Instance.DeleteShift(id);
         }
 
         public List<Shift> GetAllShifts()
         {
-            return _shiftDAL.GetAllShifts();
+            return ShiftDAL.Instance.GetAllShifts();
         }
 
         public Shift GetShiftById(int id)
         {
-            return _shiftDAL.GetShiftById(id);
+            return ShiftDAL.Instance.GetShiftById(id);
         }
 
         public void UpdateShift(Shift shift)
         {
-            _shiftDAL.UpdateShift(shift);
+            if (shift == null)
+            {
+                throw new ArgumentNullException("Không được để trống");
+            }
+            if (shift.endTime <= shift.startTime)
+            {
+                throw new InvalidOperationException("Vui lòng chọn thời gian chính xác");
+            }
+            if (ShiftDAL.Instance.GetAllShifts().Any(
+                s => ((s.id != shift.id) && ((shift.startTime >= s.startTime && shift.startTime < s.endTime) ||
+            (shift.endTime > s.startTime && shift.endTime <= s.endTime) ||
+            (shift.startTime < s.startTime && shift.endTime > s.endTime)))))
+            {
+                throw new ArgumentException("Trùng giờ với ca làm khác");
+            }
+            ShiftDAL.Instance.UpdateShift(shift);
         }
     }
 }

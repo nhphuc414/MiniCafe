@@ -21,6 +21,16 @@ namespace MiniCafeGUI.Admin
             categories = new List<Category>();
             categories.AddRange(CategoryBUS.Instance.GetAllCategories());
             InitializeComponent();
+            
+        }
+        private void dataSource()
+        {
+            dataGridView.DataSource = categories.Select(c => new { 
+                ID = c.id, 
+                Name =c.name, 
+                Description =c.description,
+                TotalProduct=ProductBUS.Instance.GetProductsByCategoryId(c.id).Count}).ToList();
+            dataGridView.Refresh();
         }
         private void loadColumn()
         {
@@ -37,7 +47,8 @@ namespace MiniCafeGUI.Admin
             deleteColumn.Text = "Xóa";
             deleteColumn.UseColumnTextForButtonValue = true;
             //add vào datagridview
-            dataGridView.DataSource = categories.Select(c => new {c.id, c.name,c.description}).ToList();
+
+            dataSource();
             dataGridView.Columns.Add(editColumn);
             dataGridView.Columns.Add(deleteColumn);
 
@@ -48,12 +59,12 @@ namespace MiniCafeGUI.Admin
         private void CategoryManagementForm_Load(object sender, EventArgs e)
         {
             loadColumn();
+            txtName.Focus();
         }
         private void resetField()
         {
             txtDescription.Text = "";
             txtName.Text = "";
-            dataGridView.Refresh();
             txtName.Focus();
         }
         private void btnDelete_Click(object sender, EventArgs e)
@@ -70,7 +81,7 @@ namespace MiniCafeGUI.Admin
             {
                 CategoryBUS.Instance.AddCategory(category);
                 categories.Add(category);
-                dataGridView.DataSource=categories.Select(c => new { c.id, c.name, c.description }).ToList();
+                dataSource();
                 MessageBox.Show("Thêm thành công");
                 resetField();
             }
@@ -85,40 +96,35 @@ namespace MiniCafeGUI.Admin
                 MessageBox.Show(ex.Message);
             }
         }
-        private void disableAllButton(int indexRow)
+        private void disableAllButton()
         {
-            dataGridView.ReadOnly = true;
-            dataGridView.Rows[indexRow].Cells["editColumn"].ReadOnly = false;
-            dataGridView.Rows[indexRow].Cells["deleteColumn"].ReadOnly = false;
             btnAdd.Enabled = false;
         }
         private void enableAllButton()
         {
-            dataGridView.Enabled=true;
+            
             btnAdd.Enabled=true;
+        }
+        private void loadOnFields(Category category)
+        {
+            txtName.Text = categories.FirstOrDefault(c => c.id == category.id).name;
+            txtDescription.Text = categories.FirstOrDefault(c => c.id == category.id).description;
+            txtName.Focus();
         }
         private void beforeCommit(int index)
         {
             Category selectedCategory = new Category();
             selectedCategory.id = Convert.ToInt32(dataGridView.Rows[index].Cells["id"].Value);
-            disableAllButton(index);
+            disableAllButton();
             //Đưa Category lên field để chỉnh sửa
-            txtName.Text = categories.FirstOrDefault(c => c.id== selectedCategory.id).name;
-            txtDescription.Text = categories.FirstOrDefault(c => c.id == selectedCategory.id).description;
-            txtName.Focus();
-            dataGridView.Rows[index].Cells["editColumn"].Value = "Cập nhật";
-            dataGridView.Rows[index].Cells["deleteColumn"].Value = "Hủy bỏ";
-           
+            loadOnFields(selectedCategory);
             dataGridView.CellContentClick -= dataGridViewCategory_CellContentClick;
             dataGridView.CellContentClick += dataGridViewCategory_CommitOrCancel;
             
         }
-        private void afterCommitOrCancel(int index)
+        private void afterCommitOrCancel()
         {
-            
             enableAllButton();
-            dataGridView.Rows[index].Cells["editColumn"].Value = "Sửa";
-            dataGridView.Rows[index].Cells["deleteColumn"].Value = "Xóa";
             dataGridView.CellContentClick -= dataGridViewCategory_CommitOrCancel;
             dataGridView.CellContentClick += dataGridViewCategory_CellContentClick;
             resetField();
@@ -126,7 +132,7 @@ namespace MiniCafeGUI.Admin
         
         private void dataGridViewCategory_CommitOrCancel(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dataGridView.Columns["editColumn"].Index && e.RowIndex ==index)
+            if (e.ColumnIndex == dataGridView.Columns["editColumn"].Index && e.RowIndex.GetHashCode() ==index)
             {
                 Category selectedCategory = new Category();
                 selectedCategory.id = Convert.ToInt32(dataGridView.Rows[e.RowIndex].Cells["id"].Value);
@@ -134,12 +140,11 @@ namespace MiniCafeGUI.Admin
                 selectedCategory.description=txtDescription.Text.Trim();
                 try
                 {
-                    CategoryBUS.Instance.UpdateCategory(selectedCategory);  
-                    categories.FirstOrDefault(c => c.id == selectedCategory.id).name = selectedCategory.name;
-                    categories.FirstOrDefault(c => c.id == selectedCategory.id).description = selectedCategory.description;
-                    dataGridView.DataSource = categories.Select(c => new { c.id, c.name, c.description }).ToList();   
+                    CategoryBUS.Instance.UpdateCategory(selectedCategory);
+                    categories[categories.FindIndex(c => c.id == selectedCategory.id)] = selectedCategory;
+                    dataSource();
                     MessageBox.Show("Cập nhật thành công");
-                    afterCommitOrCancel(e.RowIndex);
+                    afterCommitOrCancel();
                 }
                 catch (ArgumentException aex)
                 {
@@ -148,17 +153,17 @@ namespace MiniCafeGUI.Admin
                     MessageBox.Show(ex.Message);
                 }
             }
-            if (e.ColumnIndex == dataGridView.Columns["deleteColumn"].Index && e.RowIndex ==index)
+            if (e.ColumnIndex == dataGridView.Columns["deleteColumn"].Index && e.RowIndex.GetHashCode() ==index)
             {
                 index = -1;
-                afterCommitOrCancel(e.RowIndex);
+                afterCommitOrCancel();
             }
         }
         private void dataGridViewCategory_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == dataGridView.Columns["editColumn"].Index && e.RowIndex >= 0 && e.RowIndex < dataGridView.Rows.Count)
             {
-                index = e.RowIndex;
+                index = e.RowIndex.GetHashCode();
                 beforeCommit(e.RowIndex);
             }
             if (e.ColumnIndex == dataGridView.Columns["deleteColumn"].Index && e.RowIndex >= 0 && e.RowIndex < dataGridView.Rows.Count)
@@ -173,8 +178,8 @@ namespace MiniCafeGUI.Admin
                     {
                         Category selectedCategory = categories[e.RowIndex];                    
                         CategoryBUS.Instance.DeleteCategory(selectedCategory.id);
-                        categories.Remove(selectedCategory);   
-                        dataGridView.DataSource= categories.Select(c => new { c.id, c.name, c.description }).ToList();
+                        categories.Remove(selectedCategory);
+                        dataSource();
                         MessageBox.Show("Xóa thành công");
                         resetField();
                     }
