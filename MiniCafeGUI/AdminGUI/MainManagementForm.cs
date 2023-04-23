@@ -8,20 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MiniCafeGUI
+namespace MiniCafeGUI.AdminGUI
 {
-    public partial class EmployeeForm : Form
+    public partial class MainManagementForm : Form
     {
-        public EmployeeForm()
+        public MainManagementForm()
         {
             InitializeComponent();
-        }
-
-        
-
-        private void employeeForm_Load(object sender, EventArgs e)
-        {
-            lbUser.Text = Program.CurrentEmployee.employeeName;
         }
     }
 }

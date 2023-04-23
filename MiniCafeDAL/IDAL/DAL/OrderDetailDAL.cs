@@ -55,6 +55,7 @@ namespace MiniCafeDAL.IDAL.DAL
             }
             
         }
+        
         public void UpdateOrderDetail(OrderDetail orderDetail)
         {
             using (MiniCafeEntities entities = new MiniCafeEntities()) {

@@ -1,4 +1,4 @@
-﻿using MiniCafeGUI.Admin;
+﻿using MiniCafeGUI.AdminGUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MiniCafeGUI
+namespace MiniCafeGUI.AdminGUI
 {
     public partial class AdminForm : Form
     {
@@ -96,15 +96,8 @@ namespace MiniCafeGUI
 
         private void btnStatistic_Click(object sender, EventArgs e)
         {
-            try
-            {
-                MainManagementForm mainManagementForm = new MainManagementForm();
-                showForm(mainManagementForm);
-                throw new Exception("Chưa tạo chức năng");     
-            }catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            StatisticManagementForm statisticManagementForm = new StatisticManagementForm();
+            showForm(statisticManagementForm);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

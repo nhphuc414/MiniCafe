@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MiniCafeDAL.Model;
 using MiniCafeBUS.IBUS.BUS;
+using MiniCafeGUI.AdminGUI;
+using MiniCafeGUI.EmployeeGUI;
 namespace MiniCafeGUI
 {
     public partial class LoginForm : Form

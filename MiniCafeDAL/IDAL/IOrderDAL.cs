@@ -11,6 +11,7 @@ namespace MiniCafeDAL.IDAL
         List<Order> GetAllOrders();
         List<Order> GetOrderByEmployeeId(int employeeId);
         List<Order> GetOrderFromDayToDay(DateTime fromDate, DateTime toDate);
+        Order GetOrderByTableId(int id);
         Order GetOrderById(int id);
         void AddOrder(Order order);
         void UpdateOrder(Order order);

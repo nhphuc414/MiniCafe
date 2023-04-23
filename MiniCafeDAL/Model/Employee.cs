@@ -30,9 +30,14 @@ namespace MiniCafeDAL.Model
         public bool isManager { get; set; }
         public Nullable<int> shiftId { get; set; }
         public bool isFired { get; set; }
+        public bool status { get; set; }
     
         public virtual Shift Shift { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
+        public override string ToString()
+        {
+            return id.ToString()+" - "+employeeName.ToString();
+        }
     }
 }

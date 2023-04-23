@@ -63,6 +63,7 @@
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -74,53 +75,83 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin\AdminForm.cs">
+    <Compile Include="AdminGUI\AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Admin\AdminForm.Designer.cs">
+    <Compile Include="AdminGUI\AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\CategoryManagementForm.cs">
+    <Compile Include="AdminGUI\CategoryManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Admin\CategoryManagementForm.Designer.cs">
+    <Compile Include="AdminGUI\CategoryManagementForm.Designer.cs">
       <DependentUpon>CategoryManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\EmployeeManagementForm.cs">
+    <Compile Include="AdminGUI\EmployeeManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Admin\EmployeeManagementForm.Designer.cs">
+    <Compile Include="AdminGUI\EmployeeManagementForm.Designer.cs">
       <DependentUpon>EmployeeManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\MainManagementForm.cs">
+    <Compile Include="AdminGUI\MainManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Admin\MainManagementForm.Designer.cs">
+    <Compile Include="AdminGUI\MainManagementForm.Designer.cs">
       <DependentUpon>MainManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\ProductManagementForm.cs">
+    <Compile Include="AdminGUI\ProductManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Admin\ProductManagementForm.Designer.cs">
+    <Compile Include="AdminGUI\ProductManagementForm.Designer.cs">
       <DependentUpon>ProductManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\ShiftManagementForm.cs">
+    <Compile Include="AdminGUI\ShiftManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Admin\ShiftManagementForm.Designer.cs">
+    <Compile Include="AdminGUI\ShiftManagementForm.Designer.cs">
       <DependentUpon>ShiftManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Admin\TableManagementForm.cs">
+    <Compile Include="AdminGUI\StatisticManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Admin\TableManagementForm.Designer.cs">
+    <Compile Include="AdminGUI\StatisticManagementForm.Designer.cs">
+      <DependentUpon>StatisticManagementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminGUI\TableManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminGUI\TableManagementForm.Designer.cs">
       <DependentUpon>TableManagementForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Employee\EmployeeForm.cs">
+    <Compile Include="EmployeeGUI\EmployeeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Employee\EmployeeForm.Designer.cs">
+    <Compile Include="EmployeeGUI\EmployeeForm.Designer.cs">
       <DependentUpon>EmployeeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeGUI\OrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmployeeGUI\OrderForm.Designer.cs">
+      <DependentUpon>OrderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeGUI\PayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmployeeGUI\PayForm.Designer.cs">
+      <DependentUpon>PayForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeGUI\TableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmployeeGUI\TableForm.Designer.cs">
+      <DependentUpon>TableForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeGUI\TablePayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmployeeGUI\TablePayForm.Designer.cs">
+      <DependentUpon>TablePayForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -130,29 +161,44 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Admin\AdminForm.resx">
+    <EmbeddedResource Include="AdminGUI\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Admin\CategoryManagementForm.resx">
+    <EmbeddedResource Include="AdminGUI\CategoryManagementForm.resx">
       <DependentUpon>CategoryManagementForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Admin\EmployeeManagementForm.resx">
+    <EmbeddedResource Include="AdminGUI\EmployeeManagementForm.resx">
       <DependentUpon>EmployeeManagementForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Admin\MainManagementForm.resx">
+    <EmbeddedResource Include="AdminGUI\MainManagementForm.resx">
       <DependentUpon>MainManagementForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Admin\ProductManagementForm.resx">
+    <EmbeddedResource Include="AdminGUI\ProductManagementForm.resx">
       <DependentUpon>ProductManagementForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Admin\ShiftManagementForm.resx">
+    <EmbeddedResource Include="AdminGUI\ShiftManagementForm.resx">
       <DependentUpon>ShiftManagementForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Admin\TableManagementForm.resx">
+    <EmbeddedResource Include="AdminGUI\StatisticManagementForm.resx">
+      <DependentUpon>StatisticManagementForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminGUI\TableManagementForm.resx">
       <DependentUpon>TableManagementForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Employee\EmployeeForm.resx">
+    <EmbeddedResource Include="EmployeeGUI\EmployeeForm.resx">
       <DependentUpon>EmployeeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmployeeGUI\OrderForm.resx">
+      <DependentUpon>OrderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmployeeGUI\PayForm.resx">
+      <DependentUpon>PayForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmployeeGUI\TableForm.resx">
+      <DependentUpon>TableForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmployeeGUI\TablePayForm.resx">
+      <DependentUpon>TablePayForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -235,6 +281,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="image\3054889.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="image\edit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

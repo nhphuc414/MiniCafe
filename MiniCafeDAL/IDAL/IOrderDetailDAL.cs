@@ -12,5 +12,6 @@ namespace MiniCafeDAL.IDAL
         void AddOrderDetail(OrderDetail orderDetail);
         void UpdateOrderDetail(OrderDetail orderDetail);
         void DeleteOrderDetail(OrderDetail orderDetail);
+       
     }
 }

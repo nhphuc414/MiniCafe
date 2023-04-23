@@ -14,11 +14,10 @@ namespace MiniCafeBUS.IBUS.BUS
         
         private static IProductBUS instance = null;
         private static readonly object padlock = new object();
-        private readonly IProductDAL _producDAL;
 
         private ProductBUS()
         {
-            _producDAL = ProductDAL.Instance;
+           
         }
 
         public static IProductBUS Instance
@@ -38,37 +37,43 @@ namespace MiniCafeBUS.IBUS.BUS
 
         public void AddProduct(Product product)
         {
-            _producDAL.AddProduct(product);
+            if (product.name == "") { throw new Exception("Tên sản phẩm không được để trống"); };
+            ProductDAL.Instance.AddProduct(product);
         }
 
         public void DeleteProduct(int id)
         {
-            _producDAL.DeleteProduct(id);
+            ProductDAL.Instance.DeleteProduct(id);
         }
 
         public List<Product> GetAllProducts()
         {
-            return _producDAL.GetAllProducts();
+            return ProductDAL.Instance.GetAllProducts();
         }
 
         public Product GetProductById(int id)
         {
-            return _producDAL.GetProductById(id);
+            return ProductDAL.Instance.GetProductById(id);
         }
 
         public List<Product> GetProductsByCategoryId(int categoryId)
         {
-            return _producDAL.GetProductsByCategoryId(categoryId);
+            return ProductDAL.Instance.GetProductsByCategoryId(categoryId);
         }
 
         public List<Product> GetProductsIsActive()
         {
-            return _producDAL.GetProductsIsActive();
+            return ProductDAL.Instance.GetProductsIsActive();
         }
 
         public void UpdateProduct(Product product)
         {
-            _producDAL.UpdateProduct(product);
+            ProductDAL.Instance.UpdateProduct(product);
+        }
+
+        public dynamic GetRevenue()
+        {
+            return ProductDAL.Instance.GetRevenue();
         }
     }
 }

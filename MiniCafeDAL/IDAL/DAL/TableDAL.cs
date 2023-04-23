@@ -64,6 +64,14 @@ namespace MiniCafeDAL.IDAL.DAL
             }
 
         }
+        public List<Table> GetTablesOnActive()
+        {
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.Tables.Where(t=>t.status==false).ToList();
+            }
+
+        }
         public List<Table> GetAllTables()
         {
             using (MiniCafeEntities entities = new MiniCafeEntities())

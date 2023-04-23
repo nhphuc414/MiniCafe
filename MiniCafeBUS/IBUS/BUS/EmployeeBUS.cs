@@ -56,6 +56,7 @@ namespace MiniCafeBUS.IBUS.BUS
                 {
                     throw new ArgumentException("Tên đăng nhập đã tồn tại trong hệ thống.");
                 }
+                employee.status = false;
                 EmployeeDAL.Instance.AddEmployee(employee);
             }
         }
@@ -128,6 +129,10 @@ namespace MiniCafeBUS.IBUS.BUS
                 {
                     throw new ArgumentNullException(nameof(employee), "Trùng số điện thoại.");
                 } 
+                if (employee.status && employee.isFired)
+                {
+                    throw new ArgumentException("Không thể sa thải nhân viên đang làm việc");
+                }
                 EmployeeDAL.Instance.UpdateEmployee(employee);
             }
         }

@@ -1,6 +1,6 @@
-﻿namespace MiniCafeGUI.Admin
+﻿namespace MiniCafeGUI.AdminGUI
 {
-    partial class CategoryManagementForm
+    partial class ProductManagementForm
     {
         /// <summary>
         /// Required designer variable.
@@ -35,9 +35,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.groupBoxInput = new Guna.UI2.WinForms.Guna2GroupBox();
+            this.cbStatus = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.lbStatus = new System.Windows.Forms.Label();
+            this.txtQuantity = new Guna.UI2.WinForms.Guna2TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cbCategory = new Guna.UI2.WinForms.Guna2ComboBox();
             this.btnDelete = new Guna.UI2.WinForms.Guna2Button();
             this.btnAdd = new Guna.UI2.WinForms.Guna2Button();
-            this.txtDescription = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtPrice = new Guna.UI2.WinForms.Guna2TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtName = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,14 +63,20 @@
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(985, 600);
-            this.guna2Panel1.TabIndex = 0;
+            this.guna2Panel1.TabIndex = 1;
             // 
             // groupBoxInput
             // 
             this.groupBoxInput.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.groupBoxInput.Controls.Add(this.cbStatus);
+            this.groupBoxInput.Controls.Add(this.lbStatus);
+            this.groupBoxInput.Controls.Add(this.txtQuantity);
+            this.groupBoxInput.Controls.Add(this.label4);
+            this.groupBoxInput.Controls.Add(this.label3);
+            this.groupBoxInput.Controls.Add(this.cbCategory);
             this.groupBoxInput.Controls.Add(this.btnDelete);
             this.groupBoxInput.Controls.Add(this.btnAdd);
-            this.groupBoxInput.Controls.Add(this.txtDescription);
+            this.groupBoxInput.Controls.Add(this.txtPrice);
             this.groupBoxInput.Controls.Add(this.label2);
             this.groupBoxInput.Controls.Add(this.txtName);
             this.groupBoxInput.Controls.Add(this.label1);
@@ -75,9 +87,100 @@
             this.groupBoxInput.Location = new System.Drawing.Point(0, 0);
             this.groupBoxInput.Name = "groupBoxInput";
             this.groupBoxInput.Size = new System.Drawing.Size(379, 600);
-            this.groupBoxInput.TabIndex = 2;
-            this.groupBoxInput.Text = "Category";
+            this.groupBoxInput.TabIndex = 3;
+            this.groupBoxInput.Text = "Product";
             this.groupBoxInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // cbStatus
+            // 
+            this.cbStatus.BackColor = System.Drawing.Color.Transparent;
+            this.cbStatus.BorderColor = System.Drawing.Color.Black;
+            this.cbStatus.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbStatus.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbStatus.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbStatus.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbStatus.ForeColor = System.Drawing.Color.Black;
+            this.cbStatus.ItemHeight = 30;
+            this.cbStatus.Items.AddRange(new object[] {
+            "Hoạt động",
+            "Ngừng bán"});
+            this.cbStatus.Location = new System.Drawing.Point(17, 400);
+            this.cbStatus.Name = "cbStatus";
+            this.cbStatus.Size = new System.Drawing.Size(321, 36);
+            this.cbStatus.TabIndex = 10;
+            // 
+            // lbStatus
+            // 
+            this.lbStatus.AutoSize = true;
+            this.lbStatus.BackColor = System.Drawing.Color.Transparent;
+            this.lbStatus.ForeColor = System.Drawing.Color.Black;
+            this.lbStatus.Location = new System.Drawing.Point(17, 370);
+            this.lbStatus.Name = "lbStatus";
+            this.lbStatus.Size = new System.Drawing.Size(109, 25);
+            this.lbStatus.TabIndex = 9;
+            this.lbStatus.Text = "Trạng thái";
+            // 
+            // txtQuantity
+            // 
+            this.txtQuantity.BorderColor = System.Drawing.Color.Black;
+            this.txtQuantity.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtQuantity.DefaultText = "";
+            this.txtQuantity.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtQuantity.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtQuantity.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtQuantity.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtQuantity.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtQuantity.Font = new System.Drawing.Font("Tahoma", 15F);
+            this.txtQuantity.ForeColor = System.Drawing.Color.Black;
+            this.txtQuantity.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtQuantity.Location = new System.Drawing.Point(17, 319);
+            this.txtQuantity.Margin = new System.Windows.Forms.Padding(4);
+            this.txtQuantity.Name = "txtQuantity";
+            this.txtQuantity.PasswordChar = '\0';
+            this.txtQuantity.PlaceholderText = "Nhập số lượng";
+            this.txtQuantity.SelectedText = "";
+            this.txtQuantity.Size = new System.Drawing.Size(321, 46);
+            this.txtQuantity.TabIndex = 6;
+            this.txtQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQuantity_KeyPress);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(17, 289);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(96, 25);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Số lượng";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(17, 56);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(148, 25);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Loại sản phẩm";
+            // 
+            // cbCategory
+            // 
+            this.cbCategory.BackColor = System.Drawing.Color.Transparent;
+            this.cbCategory.BorderColor = System.Drawing.Color.Black;
+            this.cbCategory.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCategory.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbCategory.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbCategory.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCategory.ForeColor = System.Drawing.Color.Black;
+            this.cbCategory.ItemHeight = 30;
+            this.cbCategory.Location = new System.Drawing.Point(17, 86);
+            this.cbCategory.Name = "cbCategory";
+            this.cbCategory.Size = new System.Drawing.Size(321, 36);
+            this.cbCategory.TabIndex = 4;
             // 
             // btnDelete
             // 
@@ -94,7 +197,7 @@
             this.btnDelete.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnDelete.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnDelete.ForeColor = System.Drawing.Color.Black;
-            this.btnDelete.Location = new System.Drawing.Point(17, 313);
+            this.btnDelete.Location = new System.Drawing.Point(22, 507);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(118, 45);
             this.btnDelete.TabIndex = 3;
@@ -115,45 +218,45 @@
             this.btnAdd.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btnAdd.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnAdd.ForeColor = System.Drawing.Color.Black;
-            this.btnAdd.Location = new System.Drawing.Point(220, 313);
+            this.btnAdd.Location = new System.Drawing.Point(220, 507);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(118, 45);
             this.btnAdd.TabIndex = 2;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // txtDescription
+            // txtPrice
             // 
-            this.txtDescription.BorderColor = System.Drawing.Color.Black;
-            this.txtDescription.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtDescription.DefaultText = "";
-            this.txtDescription.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtDescription.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtDescription.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtDescription.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtDescription.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtDescription.Font = new System.Drawing.Font("Tahoma", 15F);
-            this.txtDescription.ForeColor = System.Drawing.Color.Black;
-            this.txtDescription.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtDescription.Location = new System.Drawing.Point(17, 232);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(4);
-            this.txtDescription.Name = "txtDescription";
-            this.txtDescription.PasswordChar = '\0';
-            this.txtDescription.PlaceholderText = "Nhập mô tả";
-            this.txtDescription.SelectedText = "";
-            this.txtDescription.Size = new System.Drawing.Size(321, 46);
-            this.txtDescription.TabIndex = 1;
+            this.txtPrice.BorderColor = System.Drawing.Color.Black;
+            this.txtPrice.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtPrice.DefaultText = "";
+            this.txtPrice.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtPrice.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtPrice.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtPrice.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtPrice.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtPrice.Font = new System.Drawing.Font("Tahoma", 15F);
+            this.txtPrice.ForeColor = System.Drawing.Color.Black;
+            this.txtPrice.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtPrice.Location = new System.Drawing.Point(17, 238);
+            this.txtPrice.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPrice.Name = "txtPrice";
+            this.txtPrice.PasswordChar = '\0';
+            this.txtPrice.PlaceholderText = "Nhập giá";
+            this.txtPrice.SelectedText = "";
+            this.txtPrice.Size = new System.Drawing.Size(321, 46);
+            this.txtPrice.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(17, 190);
+            this.label2.Location = new System.Drawing.Point(17, 208);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 25);
+            this.label2.Size = new System.Drawing.Size(42, 25);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Mô tả";
+            this.label2.Text = "Giá";
             // 
             // txtName
             // 
@@ -165,14 +268,14 @@
             this.txtName.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtName.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.txtName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtName.Font = new System.Drawing.Font("Tahoma", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtName.Font = new System.Drawing.Font("Tahoma", 15F);
             this.txtName.ForeColor = System.Drawing.Color.Black;
             this.txtName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtName.Location = new System.Drawing.Point(17, 127);
+            this.txtName.Location = new System.Drawing.Point(17, 157);
             this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.Name = "txtName";
             this.txtName.PasswordChar = '\0';
-            this.txtName.PlaceholderText = "Nhập loại sản phẩm";
+            this.txtName.PlaceholderText = "Nhập tên sản phẩm";
             this.txtName.SelectedText = "";
             this.txtName.Size = new System.Drawing.Size(321, 46);
             this.txtName.TabIndex = 0;
@@ -182,11 +285,11 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(17, 85);
+            this.label1.Location = new System.Drawing.Point(17, 127);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(148, 25);
+            this.label1.Size = new System.Drawing.Size(146, 25);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Loại sản phẩm";
+            this.label1.Text = "Tên sản phẩm";
             // 
             // guna2Panel2
             // 
@@ -240,7 +343,7 @@
             dataGridViewCellStyle10.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridView.Size = new System.Drawing.Size(600, 600);
-            this.dataGridView.TabIndex = 0;
+            this.dataGridView.TabIndex = 1;
             this.dataGridView.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.SunFlower;
             this.dataGridView.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(237)))), ((int)(((byte)(183)))));
             this.dataGridView.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -263,20 +366,18 @@
             this.dataGridView.ThemeStyle.RowsStyle.Height = 22;
             this.dataGridView.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(215)))), ((int)(((byte)(95)))));
             this.dataGridView.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
-            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCategory_CellContentClick);
+            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             // 
-            // CategoryManagementForm
+            // ProductManagementForm
             // 
-            this.AcceptButton = this.btnAdd;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnDelete;
             this.ClientSize = new System.Drawing.Size(985, 600);
             this.Controls.Add(this.guna2Panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "CategoryManagementForm";
-            this.Text = "categoryForm";
-            this.Load += new System.EventHandler(this.CategoryManagementForm_Load);
+            this.Name = "ProductManagementForm";
+            this.Text = "ProductManagementForm";
+            this.Load += new System.EventHandler(this.ProductManagementForm_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.groupBoxInput.ResumeLayout(false);
             this.groupBoxInput.PerformLayout();
@@ -290,13 +391,19 @@
 
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
+        private Guna.UI2.WinForms.Guna2DataGridView dataGridView;
         private Guna.UI2.WinForms.Guna2GroupBox groupBoxInput;
+        private Guna.UI2.WinForms.Guna2Button btnDelete;
+        private Guna.UI2.WinForms.Guna2Button btnAdd;
+        private Guna.UI2.WinForms.Guna2TextBox txtPrice;
+        private System.Windows.Forms.Label label2;
         private Guna.UI2.WinForms.Guna2TextBox txtName;
         private System.Windows.Forms.Label label1;
-        private Guna.UI2.WinForms.Guna2TextBox txtDescription;
-        private System.Windows.Forms.Label label2;
-        private Guna.UI2.WinForms.Guna2Button btnAdd;
-        private Guna.UI2.WinForms.Guna2Button btnDelete;
-        private Guna.UI2.WinForms.Guna2DataGridView dataGridView;
+        private Guna.UI2.WinForms.Guna2TextBox txtQuantity;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private Guna.UI2.WinForms.Guna2ComboBox cbCategory;
+        private System.Windows.Forms.Label lbStatus;
+        private Guna.UI2.WinForms.Guna2ComboBox cbStatus;
     }
 }

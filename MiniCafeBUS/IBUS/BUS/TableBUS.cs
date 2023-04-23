@@ -10,13 +10,11 @@ namespace MiniCafeBUS.IBUS.BUS
 {
     public class TableBUS : ITableBUS
     {
-        private readonly ITableDAL _tableDAL;
         private static ITableBUS instance = null;
         private static readonly object padlock = new object();
 
         private TableBUS()
         {
-            _tableDAL = TableDAL.Instance;
         }
 
         public static ITableBUS Instance
@@ -35,27 +33,31 @@ namespace MiniCafeBUS.IBUS.BUS
         }
         public void AddTable(Table table)
         {
-            _tableDAL.AddTable(table);
+            TableDAL.Instance.AddTable(table);
         }
 
         public void DeleteTable(int id)
         {
-            _tableDAL.DeleteTable(id);
+            TableDAL.Instance.DeleteTable(id);
         }
 
         public List<Table> GetAllTables()
         {
-           return _tableDAL.GetAllTables();
+           return TableDAL.Instance.GetAllTables();
         }
 
         public Table GetTableById(int id)
         {
-            return _tableDAL.GetTableById(id);
+            return TableDAL.Instance.GetTableById(id);
         }
 
         public void UpdateTable(Table table)
         {
-            _tableDAL.UpdateTable(table);
+            TableDAL.Instance.UpdateTable(table);
+        }
+        public List<Table> GetTablesOnActive()
+        {
+            return TableDAL.Instance.GetTablesOnActive();
         }
     }
 }

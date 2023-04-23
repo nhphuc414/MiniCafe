@@ -19,7 +19,6 @@ namespace MiniCafeDAL.Model
         {
             this.Products = new HashSet<Product>();
         }
-    
         public int id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
@@ -28,7 +27,7 @@ namespace MiniCafeDAL.Model
         public virtual ICollection<Product> Products { get; set; }
         public override string ToString()
         {
-            return id.ToString()+ " - "+name.ToString();
+            return id.ToString()+" "+ name.ToString();
         }
     }
 }

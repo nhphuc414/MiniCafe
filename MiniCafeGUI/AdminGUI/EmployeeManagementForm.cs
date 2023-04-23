@@ -11,7 +11,7 @@ using MiniCafeBUS.IBUS.BUS;
 using MiniCafeDAL.IDAL.DAL;
 using MiniCafeDAL.Model;
 
-namespace MiniCafeGUI.Admin
+namespace MiniCafeGUI.AdminGUI
 {
     public partial class EmployeeManagementForm : Form
     {
@@ -43,9 +43,10 @@ namespace MiniCafeGUI.Admin
                 Name = e.employeeName,Number = e.number,
                 Birthday = e.birthday.ToString("dd-MM-yyyy"),
                 Username = e.username,
-                Role = (e.isManager == true ? "Manager" : "Employee"),
-                Status = (e.isFired==true ?"Fired":"Active"),
-                Shift= (ShiftBUS.Instance.GetShiftById((int)e.shiftId).ToString()),
+                Role = (e.isManager ? "Manager" : "Employee"),
+                Status = e.status? "Busy":"Lazy",
+                Active = (e.isFired ? "Fired" : "Active"),
+                Shift = (ShiftBUS.Instance.GetShiftById((int)e.shiftId).ToString()),
             }).ToList();
             dataGridView.Refresh();
         }
@@ -187,6 +188,7 @@ namespace MiniCafeGUI.Admin
                     Employee selectedEmployee = new Employee();
                     selectedEmployee.id = Convert.ToInt32(dataGridView.Rows[e.RowIndex].Cells["id"].Value);
                     getInField(selectedEmployee);
+                    selectedEmployee.status = employees[employees.FindIndex(es => es.id == selectedEmployee.id)].status;
                     EmployeeBUS.Instance.UpdateEmployee(selectedEmployee);
                     employees[employees.FindIndex(es => es.id == selectedEmployee.id)] = selectedEmployee;
                     dataSource();

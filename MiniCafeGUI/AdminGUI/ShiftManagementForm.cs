@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MiniCafeBUS.IBUS.BUS;
-namespace MiniCafeGUI.Admin
+namespace MiniCafeGUI.AdminGUI
 {
     public partial class ShiftManagementForm : Form
     {

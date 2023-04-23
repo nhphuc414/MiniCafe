@@ -13,10 +13,9 @@ namespace MiniCafeBUS.IBUS.BUS
     {
         private static IOrderBUS instance = null;
         private static readonly object padlock = new object();
-        private readonly IOrderDAL _orderDAL;
         private OrderBUS()
         {
-            _orderDAL = OrderDAL.Instance;
+           
         }
 
         public static IOrderBUS Instance
@@ -36,37 +35,40 @@ namespace MiniCafeBUS.IBUS.BUS
 
         public void AddOrder(Order order)
         {
-            _orderDAL.AddOrder(order);
+            OrderDAL.Instance.AddOrder(order);
         }
 
         public void DeleteOrder(int id)
         {
-            _orderDAL.DeleteOrder(id);
+            OrderDAL.Instance.DeleteOrder(id);
         }
 
         public List<Order> GetAllOrders()
         {
-            return _orderDAL.GetAllOrders();
+            return OrderDAL.Instance.GetAllOrders();
         }
 
         public List<Order> GetOrderByEmployeeId(int employeeId)
         {
-            return _orderDAL.GetOrderByEmployeeId(employeeId);
+            return OrderDAL.Instance.GetOrderByEmployeeId(employeeId);
         }
-
+        public Order GetOrderByTableId(int id)
+        {
+            return OrderDAL.Instance.GetOrderByTableId(id);
+        }
         public Order GetOrderById(int id)
         {
-            return _orderDAL.GetOrderById(id);
+            return OrderDAL.Instance.GetOrderById(id);
         }
 
         public List<Order> GetOrderFromDayToDay(DateTime fromDate, DateTime toDate)
         {
-            return _orderDAL.GetOrderFromDayToDay(fromDate, toDate);
+            return OrderDAL.Instance.GetOrderFromDayToDay(fromDate, toDate);
         }
 
         public void UpdateOrder(Order order)
         {
-            _orderDAL.UpdateOrder(order);
+            OrderDAL.Instance.UpdateOrder(order);
         }
     }
 }

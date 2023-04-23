@@ -27,6 +27,7 @@
           <Property Name="isManager" Type="bit" Nullable="false" />
           <Property Name="isFired" Type="bit" Nullable="false" />
           <Property Name="shiftId" Type="int" />
+          <Property Name="status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderDetails">
           <Key>
@@ -211,6 +212,7 @@
           <NavigationProperty Name="Shift" Relationship="Self.FK__Employees__shift__34C8D9D1" FromRole="Employees" ToRole="Shifts" />
           <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__employee__3A81B327" FromRole="Employees" ToRole="Orders" />
           <Property Name="isFired" Type="Boolean" Nullable="false" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -393,6 +395,7 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="MiniCafeModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="isFired" ColumnName="isFired" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="employeeName" ColumnName="employeeName" />

@@ -15,5 +15,7 @@ namespace MiniCafeBUS.IBUS
         List<Product> GetProductsByCategoryId(int categoryId);
         List<Product> GetProductsIsActive();
         List<Product> GetAllProducts();
+
+        dynamic GetRevenue();
     }
 }

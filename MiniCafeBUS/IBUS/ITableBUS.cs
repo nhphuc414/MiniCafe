@@ -13,5 +13,6 @@ namespace MiniCafeBUS.IBUS
         void DeleteTable(int id);
         Table GetTableById(int id);
         List<Table> GetAllTables();
+        List<Table> GetTablesOnActive();
     }
 }

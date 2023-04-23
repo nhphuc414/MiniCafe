@@ -1,4 +1,4 @@
-﻿namespace MiniCafeGUI.Admin
+﻿namespace MiniCafeGUI.AdminGUI
 {
     partial class MainManagementForm
     {

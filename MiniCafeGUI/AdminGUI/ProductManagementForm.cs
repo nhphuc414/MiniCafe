@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using MiniCafeBUS.IBUS.BUS;
 using MiniCafeDAL.Model;
 
-namespace MiniCafeGUI.Admin
+namespace MiniCafeGUI.AdminGUI
 {
     public partial class ProductManagementForm : Form
     {

@@ -28,8 +28,7 @@ namespace MiniCafeDAL.Model
         public virtual ICollection<Employee> Employees { get; set; }
         public override string ToString()
         {
-            return startTime.ToString() + " ==> "+endTime.ToString();
+            return startTime.ToString()+ " ==> "+endTime.ToString();
         }
-
     }
 }

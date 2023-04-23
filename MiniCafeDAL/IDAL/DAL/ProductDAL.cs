@@ -83,5 +83,20 @@ namespace MiniCafeDAL.IDAL.DAL
             }
             
         }
+        public dynamic GetRevenue()
+        {
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return from od in entities.OrderDetails
+                       join p in entities.Products
+                       on od.productId equals p.id
+                       select new
+                       {
+                           ID = p.id,
+                           Name = p.name,
+                           Revenue = od.unitPrice * od.quantity
+                       };
+            } 
+        }
     }
 }

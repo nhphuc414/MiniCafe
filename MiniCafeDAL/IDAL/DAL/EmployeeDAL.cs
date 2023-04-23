@@ -82,7 +82,7 @@ namespace MiniCafeDAL.IDAL.DAL
         {
             using (MiniCafeEntities entities = new MiniCafeEntities())
             {
-                return entities.Employees.Where(e => !e.isFired).ToList();
+                return entities.Employees.Where(e => !e.isFired && e.status==false).ToList();
             }
         }
         public Employee GetEmployeeByUsernameAndPassword(string username, string password)

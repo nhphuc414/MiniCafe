@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MiniCafeDAL.Model;
+using MiniCafeBUS.IBUS.BUS;
+using System.Windows.Forms.DataVisualization.Charting;
 
-namespace MiniCafeGUI.Admin
+namespace MiniCafeGUI.AdminGUI
 {
-    public partial class MainManagementForm : Form
+    public partial class StatisticManagementForm : Form
     {
-        public MainManagementForm()
+        public StatisticManagementForm()
         {
             InitializeComponent();
         }

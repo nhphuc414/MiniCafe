@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MiniCafeGUI.Admin
+namespace MiniCafeGUI.AdminGUI
 {
     public partial class CategoryManagementForm : Form
     {

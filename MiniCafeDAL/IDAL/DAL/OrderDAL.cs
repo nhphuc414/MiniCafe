@@ -93,6 +93,14 @@ namespace MiniCafeDAL.IDAL.DAL
             }
 
         }
+        public Order GetOrderByTableId(int id)
+        {
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.Orders.FirstOrDefault(o => o.tableId==id && o.status);
+            }
+
+        }
 
     }
 }
