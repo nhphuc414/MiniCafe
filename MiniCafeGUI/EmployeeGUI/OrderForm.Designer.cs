@@ -103,7 +103,7 @@
             this.txtQuantity.PlaceholderText = "Nhập số lượng";
             this.txtQuantity.SelectedText = "";
             this.txtQuantity.Size = new System.Drawing.Size(316, 46);
-            this.txtQuantity.TabIndex = 7;
+            this.txtQuantity.TabIndex = 2;
             this.txtQuantity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtQuantity_KeyPress);
             // 
             // label3
@@ -131,7 +131,7 @@
             this.cbProduct.Location = new System.Drawing.Point(22, 210);
             this.cbProduct.Name = "cbProduct";
             this.cbProduct.Size = new System.Drawing.Size(316, 36);
-            this.cbProduct.TabIndex = 5;
+            this.cbProduct.TabIndex = 1;
             // 
             // cbCategory
             // 
@@ -147,7 +147,7 @@
             this.cbCategory.Location = new System.Drawing.Point(22, 113);
             this.cbCategory.Name = "cbCategory";
             this.cbCategory.Size = new System.Drawing.Size(316, 36);
-            this.cbCategory.TabIndex = 4;
+            this.cbCategory.TabIndex = 0;
             this.cbCategory.SelectedIndexChanged += new System.EventHandler(this.cbCategory_SelectedIndexChanged);
             // 
             // btnPay
@@ -168,7 +168,7 @@
             this.btnPay.Location = new System.Drawing.Point(220, 512);
             this.btnPay.Name = "btnPay";
             this.btnPay.Size = new System.Drawing.Size(118, 45);
-            this.btnPay.TabIndex = 3;
+            this.btnPay.TabIndex = 4;
             this.btnPay.Text = "Xuất hóa đơn";
             this.btnPay.Click += new System.EventHandler(this.btnPay_Click);
             // 
@@ -189,7 +189,7 @@
             this.btnAdd.Location = new System.Drawing.Point(220, 390);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(118, 45);
-            this.btnAdd.TabIndex = 2;
+            this.btnAdd.TabIndex = 3;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -294,6 +294,7 @@
             // 
             // OrderForm
             // 
+            this.AcceptButton = this.btnAdd;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(985, 600);

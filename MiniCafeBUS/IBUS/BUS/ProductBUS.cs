@@ -37,7 +37,10 @@ namespace MiniCafeBUS.IBUS.BUS
 
         public void AddProduct(Product product)
         {
-            if (product.name == "") { throw new Exception("Tên sản phẩm không được để trống"); };
+            if (product.name == "") { throw new Exception("Tên sản phẩm không được để trống"); }
+            if (ProductDAL.Instance.GetAllProducts().Any(p=>p.name==product.name &&p.categoryId==product.categoryId)) { 
+                throw new Exception("Đã có sản phẩm này"); 
+            }
             ProductDAL.Instance.AddProduct(product);
         }
 
@@ -68,6 +71,11 @@ namespace MiniCafeBUS.IBUS.BUS
 
         public void UpdateProduct(Product product)
         {
+            if (product.name == "") { throw new Exception("Tên sản phẩm không được để trống"); }
+            if (ProductDAL.Instance.GetAllProducts().Any(p =>!(p.id==product.id )&& p.name.Equals(product.name) && p.categoryId == product.categoryId))
+            {
+                throw new Exception("Đã có sản phẩm này");
+            }
             ProductDAL.Instance.UpdateProduct(product);
         }
 

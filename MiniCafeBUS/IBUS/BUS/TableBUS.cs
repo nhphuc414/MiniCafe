@@ -33,6 +33,10 @@ namespace MiniCafeBUS.IBUS.BUS
         }
         public void AddTable(Table table)
         {
+            if (TableDAL.Instance.GetAllTables().Any(t => t.name.Equals(table.name)))
+            {
+                throw new Exception("Tên bàn đã có");
+            }
             TableDAL.Instance.AddTable(table);
         }
 
@@ -53,6 +57,10 @@ namespace MiniCafeBUS.IBUS.BUS
 
         public void UpdateTable(Table table)
         {
+            if (TableDAL.Instance.GetAllTables().Any(t => t.id!=table.id && t.name.Equals(table.name)))
+            {
+                throw new Exception("Tên bàn đã có");
+            }
             TableDAL.Instance.UpdateTable(table);
         }
         public List<Table> GetTablesOnActive()

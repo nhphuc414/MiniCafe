@@ -161,9 +161,9 @@ namespace MiniCafeGUI.EmployeeGUI
         }
         private bool checkChange()
         {
-            if (Decimal.TryParse(txtCustomerPay.Text, out total))
+            if (Decimal.TryParse(txtCustomerPay.Text, out decimal change))
             {
-                if (total - this.total >= 0)
+                if (change - this.total >= 0)
                 {
                     return true;
                 }
