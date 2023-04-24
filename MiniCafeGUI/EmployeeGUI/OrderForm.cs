@@ -37,6 +37,7 @@ namespace MiniCafeGUI.EmployeeGUI
         }
         private void loadColumn()
         {
+            dataGridView.Columns.Clear();
             // Tạo cột "Sửa"
             var editColumn = new DataGridViewButtonColumn();
             editColumn.HeaderText = "Edit";
