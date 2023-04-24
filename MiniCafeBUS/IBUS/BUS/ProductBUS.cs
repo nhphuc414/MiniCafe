@@ -45,7 +45,11 @@ namespace MiniCafeBUS.IBUS.BUS
         }
 
         public void DeleteProduct(int id)
-        {
+        { 
+            if (OrderDetailDAL.Instance.GetOrderDetailsByProductId(id).Any())
+            {
+                throw new Exception("Không thể xóa sản phẩm đã từng bán");
+            }
             ProductDAL.Instance.DeleteProduct(id);
         }
 

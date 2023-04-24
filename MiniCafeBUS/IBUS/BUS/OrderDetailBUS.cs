@@ -13,11 +13,10 @@ namespace MiniCafeBUS.IBUS.BUS
     {
         private static IOrderDetailBUS instance = null;
         private static readonly object padlock = new object();
-        private readonly IOrderDetailDAL _orderDetailDAL;
 
         private OrderDetailBUS()
         {
-            _orderDetailDAL = OrderDetailDAL.Instance;
+           
         }
 
         public static IOrderDetailBUS Instance
@@ -37,23 +36,28 @@ namespace MiniCafeBUS.IBUS.BUS
 
         public void AddOrderDetail(OrderDetail orderDetail)
         {
-            _orderDetailDAL.AddOrderDetail(orderDetail);
+            OrderDetailDAL.Instance.AddOrderDetail(orderDetail);
         }
 
         public void DeleteOrderDetail(OrderDetail orderDetail)
         {
-            _orderDetailDAL.DeleteOrderDetail(orderDetail);
+            OrderDetailDAL.Instance.DeleteOrderDetail(orderDetail);
         }
 
         public List<OrderDetail> GetOrderDetailsByOrderId(int orderId)
         {
-            return _orderDetailDAL.GetOrderDetailsByOrderId(orderId);
+            return OrderDetailDAL.Instance.GetOrderDetailsByOrderId(orderId);
         }
 
         public void UpdateOrderDetail(OrderDetail orderDetail)
         {
-            _orderDetailDAL.UpdateOrderDetail(orderDetail);
+            OrderDetailDAL.Instance.UpdateOrderDetail(orderDetail);
         }
-        
+        public List<OrderDetail> GetOrderDetailsByProductId(int productId)
+        {
+           return  OrderDetailDAL.Instance.GetOrderDetailsByProductId(productId);
+        }
+
+
     }
 }

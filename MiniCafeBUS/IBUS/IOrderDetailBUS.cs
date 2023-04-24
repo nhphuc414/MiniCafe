@@ -12,6 +12,6 @@ namespace MiniCafeBUS.IBUS
         void AddOrderDetail(OrderDetail orderDetail);
         void UpdateOrderDetail(OrderDetail orderDetail);
         void DeleteOrderDetail(OrderDetail orderDetail);
-        
+        List<OrderDetail> GetOrderDetailsByProductId(int productId);
     }
 }

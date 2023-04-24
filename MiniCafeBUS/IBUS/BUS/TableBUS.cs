@@ -42,6 +42,10 @@ namespace MiniCafeBUS.IBUS.BUS
 
         public void DeleteTable(int id)
         {
+            if (TableDAL.Instance.GetTableById(id).status == true)
+            {
+                throw new Exception("Bàn đang được sử dụng, không thể xóa");
+            }
             TableDAL.Instance.DeleteTable(id);
         }
 

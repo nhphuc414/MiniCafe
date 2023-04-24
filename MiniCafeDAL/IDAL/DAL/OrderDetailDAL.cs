@@ -64,6 +64,14 @@ namespace MiniCafeDAL.IDAL.DAL
             }
             
         }
+        public List<OrderDetail> GetOrderDetailsByProductId(int productId)
+        {
+            using (MiniCafeEntities entities = new MiniCafeEntities())
+            {
+                return entities.OrderDetails.Where(od => od.productId == productId).ToList();
+            }
+
+        }
 
     }
 }
